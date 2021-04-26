@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "userId",
         targetKey: "id",
       });
+      models.belongsToMany(models.Complete, {
+        through: "joinTable",
+        foreignKey: "todoId",
+      });
     }
   }
   todo.init(

@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class joinTable extends Model {
     /**
@@ -10,15 +8,19 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      models.joinTable.belongsTo(models.todo, { foreignKey: "todoId" });
+      models.joinTable.belongsTo(models.status, { foreignKey: "statusId" });
     }
-  };
-  joinTable.init({
-    todoId: DataTypes.INTEGER,
-    statusId: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'joinTable',
-  });
+  }
+  joinTable.init(
+    {
+      todoId: DataTypes.INTEGER,
+      statusId: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: "joinTable",
+    }
+  );
   return joinTable;
 };
